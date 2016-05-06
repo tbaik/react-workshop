@@ -4,3 +4,7 @@ SETUP:
 
 Then run:
 `npm install`
+
+To run the Tests:
+
+`npm test`
