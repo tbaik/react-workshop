@@ -1,7 +1,9 @@
+var path = require('path');
+
 module.exports = {
-  entry: './main.js',
+  entry: './src/core/index.js',
   output: {
-    path: './',
+    path: './target/',
     filename: 'index.js'
   },
   devServer: {
@@ -19,5 +21,9 @@ module.exports = {
         }
       }
     ]
+  },
+  resolve: {
+    root: [path.resolve(__dirname, 'src/core'), path.resolve(__dirname, 'src/test')],
+    extensions: ["", ".js", ".jsx"]
   }
 }
