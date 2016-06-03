@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server",
+    "test:watcher": "jest -- --watch",
     "test": "jest"
   },
   "author": "",
