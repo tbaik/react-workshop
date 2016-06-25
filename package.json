@@ -8,7 +8,6 @@
   },
   "scripts": {
     "start": "webpack-dev-server",
-    "test:watcher": "jest -- --watch",
     "test": "jest"
   },
   "author": "",
@@ -19,6 +18,7 @@
     "babel-loader": "^6.2.4",
     "react": "~0.14.0",
     "react-dom": "~0.14.0",
+    "superagent": "^1.8.3",
     "webpack": "^1.13.0"
   },
   "devDependencies": {
