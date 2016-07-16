@@ -1,21 +1,25 @@
 'use strict';
 
-import Reflux from 'reflux';
-import ListingsActions from '../actions/listings';
+const Reflux = require('reflux');
+const ListingsAction = require('../actions/listings');
+const Client = require('../utils/client');
 
-export default Reflux.createStore({
+module.exports = Reflux.createStore({
   displayName: 'Listings Store',
 
-  data: {
-    listings: {}
-  },
+  data: {},
 
   init: function() {
-    this.listenTo(ListingsAction.storeSubredditListings, this.setListings.bind(this));
+    this.listenTo(ListingsAction.subredditListingsRequested, this.getListings);
+    this.listenTo(ListingsAction.storeSubredditListings, this.setListings);
   },
 
   getInitialState: function() {
     return this.data;
+  },
+
+  getListings: function(subreddit) {
+    Client.getSubredditListings(subreddit);
   },
 
   setListings: function(listings) {

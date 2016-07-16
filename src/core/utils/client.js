@@ -1,10 +1,11 @@
-import request from 'superagent';
+const request = require('superagent');
+const ListingsAction = require('../actions/listings');
 
 function createSubredditListingUrl(name) {
   return 'https://www.reddit.com/r/' + name + '/.json';
 }
 
-var client = {
+module.exports = {
   makeGetRequest: function (options, callback) {
     request
       .get(options.url)
@@ -16,8 +17,9 @@ var client = {
     this.makeGetRequest({url: url}, this.subredditListingsCallback);
   },
 
-  subredditListingsCallback: function () {
+  subredditListingsCallback: function (err, res) {
+    if (!err && res.ok) {
+      ListingsAction.storeSubredditListings(JSON.parse(res.text).data.children);
+    }
   }
 };
-
-export default client;

@@ -1,7 +1,8 @@
 'use strict';
 
-import Reflux from 'reflux';
+const Reflux = require('reflux');
 
-export default Reflux.createActions([
+module.exports = Reflux.createActions([
+  'subredditListingsRequested',
   'storeSubredditListings'
 ]);

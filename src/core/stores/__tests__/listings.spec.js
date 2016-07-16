@@ -1,15 +1,26 @@
-jest
-  .unmock('../listings');
+jest.disableAutomock();
 
-import ListingsStore from '../listings';
-import ListingsAction from '../../actions/listings';
+const ListingsStore = require('../listings');
+const ListingsAction = require('../../actions/listings');
+const Client = require('../../utils/client');
 
 describe('ListingsStore', () => {
-  describe('Action storeSubredditListings', function() {
-    it('sets current subreddit listings', function() {
+  describe('Action subredditListingsRequested', () => {
+    it('gets the requested subreddit listings', () => {
+      var subreddit = 'someSubreddit';
+      Client.getSubredditListings = jest.genMockFn();
+
+      ListingsAction.subredditListingsRequested.trigger(subreddit);
+
+      expect(Client.getSubredditListings).toBeCalledWith(subreddit);
+    });
+  });
+
+  describe('Action storeSubredditListings', () => {
+    it('sets current subreddit listings', () => {
       var result = { listing: "someListing" };
 
-      ListingsAction.storeSubredditListings();
+      ListingsAction.storeSubredditListings.trigger(result);
 
       expect(ListingsStore.data.listings).toEqual(result);
     });

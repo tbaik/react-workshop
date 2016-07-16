@@ -1,6 +1,9 @@
 jest
   .mock('superagent')
-  .unmock('../client');
+  .dontMock('reflux')
+  .dontMock('../client');
+
+const ListingsAction = require('../../actions/listings');
 
 describe('Client', () => {
   describe('superagent requests', function() {
@@ -14,7 +17,7 @@ describe('Client', () => {
     };
     jest.setMock('superagent', request);
 
-    var client = require('../client').default;
+    var client = require('../client');
 
     var callback = jest.genMockFunction();
 
@@ -41,6 +44,20 @@ describe('Client', () => {
         client.getSubredditListings('reactjs');
 
         expect(client.makeGetRequest).toBeCalledWith(options, client.subredditListingsCallback);
+      });
+    });
+
+    describe('subredditListingsCallback', function() {
+      it('calls the storeSubredditListings action with the listings data', function() {
+        var response = {
+          text: '{"data": {"children": ["listing1"]}}',
+          ok: true
+        };
+        ListingsAction.storeSubredditListings = jest.genMockFn();
+
+        client.subredditListingsCallback(null, response);
+
+        expect(ListingsAction.storeSubredditListings).toBeCalledWith(["listing1"]);
       });
     });
   });
