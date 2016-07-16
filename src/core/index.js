@@ -1,12 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-DOM';
-import CheckboxWithLabel from 'components/checkboxWithLabel';
-import Listing from 'components/listing';
+import ListingContainer from 'components/listingsContainer';
 
 ReactDOM.render(
   (<div>
-  <CheckboxWithLabel / >
-  <Listing title="Jayden" score={14} />
-  <Listing title="Tony" score={12031031203012} />
+    <ListingContainer />
   </div>)
   , document.getElementById('app'))

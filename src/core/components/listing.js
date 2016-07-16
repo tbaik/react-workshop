@@ -1,17 +1,30 @@
-import React from 'react';
+const React = require('react');
 
-export default class Listing extends React.Component {
-  render() {
+module.exports = React.createClass({
+  displayName: 'Listing Component',
+
+  propTypes: {
+    title: React.PropTypes.string.isRequired,
+    author: React.PropTypes.string.isRequired,
+    url: React.PropTypes.string.isRequired,
+    score: React.PropTypes.number.isRequired
+  },
+
+  render: function() {
     return (
-      <div>
-      {this.props.title} - {this.props.score}
-      </div>
+      <tr className="listing" id={this.props.key}>
+        <td className="scoreContainer">
+          <p className="score">{this.props.score}</p>
+        </td>
+        <td className="titleContainer">
+          <p className="title">
+            <a href={this.props.url}>{this.props.title}</a>
+          </p>
+          <p className="author">
+            <i>{this.props.author}</i>
+          </p>
+        </td>
+      </tr>
     );
   }
-}
-
-Listing.propTypes = {
-  title: React.PropTypes.string.isRequired,
-  score: React.PropTypes.number.isRequired
-};
-
+});

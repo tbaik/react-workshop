@@ -1,0 +1,75 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:300);
+
+body {
+  background-color: #e0e0e0;
+  font-family: 'Lato';
+  color: white;
+  font-weight: 300;
+}
+
+h1 {
+  font-weight: 300;
+  text-transform: uppercase;
+  font-size: 42px;
+
+}
+
+.navigation {
+  width: 200px;
+  text-transform: uppercase;
+  float: right;
+}
+
+.navigation ul {
+  background-color: #37383a;
+  cursor: pointer;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.navigation .header {
+  padding: 15px;
+  background-color: #4e5053;
+}
+
+.navigation li {
+  padding: 15px;
+}
+
+.navigation .selected {
+  background-color: #9061b2;
+}
+
+.score {
+  font-size: 36px;
+  text-align: center;
+  margin: 15px;
+  color: #2d2d2d;
+}
+
+.title a {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 18px;
+  text-decoration: none;
+  color: #000000;
+}
+
+.scoreContainer {
+  background-color: #f5f5f5;
+}
+
+.titleContainer {
+  background-color: #fafafa;
+}
+
+.listing {
+}
+
+.author {
+  margin-left: 10px;
+  font-size: 16px;
+  color: #afb3b9;
+}
