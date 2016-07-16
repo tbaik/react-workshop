@@ -20,16 +20,6 @@ describe('ListingsContainer', () => {
     });
   });
 
-  describe('componentDidMount', () => {
-    it('triggers action to request subreddit listings', () => {
-        ListingsAction.subredditListingsRequested = jest.genMockFn();
-
-        TestUtils.renderIntoDocument(<ListingsContainer />);
-
-        expect(ListingsAction.subredditListingsRequested).toBeCalledWith('reactjs');
-    });
-  });
-
   describe('After state change', () => {
     const firstListing = {
       id: 'one',

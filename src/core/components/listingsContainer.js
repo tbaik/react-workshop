@@ -11,10 +11,6 @@ module.exports = React.createClass({
 
   mixins: [ Reflux.connect(ListingsStore, 'listings') ],
 
-  componentDidMount: function() {
-    ListingsAction.subredditListingsRequested('reactjs');
-  },
-
   render: function() {
     var listings = this.state.listings.listings;
 

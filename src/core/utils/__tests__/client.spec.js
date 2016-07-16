@@ -38,11 +38,11 @@ describe('Client', () => {
     describe('getSubredditListings', () => {
       it('calls makeGetRequest with a url for a specific subreddit listing', () => {
         var options = {
-          url: 'https://www.reddit.com/r/reactjs/.json'
+          url: 'https://www.reddit.com/r/reactjs.json'
         };
         client.makeGetRequest = jest.genMockFn();
 
-        client.getSubredditListings('reactjs');
+        client.getSubredditListings('/r/reactjs');
 
         expect(client.makeGetRequest).toBeCalledWith(options, client.subredditListingsCallback);
       });

@@ -5,8 +5,8 @@ const SubredditsAction = require('../actions/subreddits');
 
 const REDDIT_HOST = 'https://www.reddit.com';
 
-function createSubredditListingUrl(name) {
-  return REDDIT_HOST + '/r/' + name + '/.json';
+function createSubredditListingUrl(url) {
+  return REDDIT_HOST + url + '.json';
 }
 
 module.exports = {
