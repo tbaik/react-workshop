@@ -1,8 +1,12 @@
 const request = require('superagent');
+
 const ListingsAction = require('../actions/listings');
+const SubredditsAction = require('../actions/subreddits');
+
+const REDDIT_HOST = 'https://www.reddit.com';
 
 function createSubredditListingUrl(name) {
-  return 'https://www.reddit.com/r/' + name + '/.json';
+  return REDDIT_HOST + '/r/' + name + '/.json';
 }
 
 module.exports = {
@@ -20,6 +24,17 @@ module.exports = {
   subredditListingsCallback: function (err, res) {
     if (!err && res.ok) {
       ListingsAction.storeSubredditListings(JSON.parse(res.text).data.children);
+    }
+  },
+
+  getPopularSubreddits: function () {
+    const url = REDDIT_HOST + '/subreddits/popular.json';
+    this.makeGetRequest({url: url}, this.subredditsCallback);
+  },
+
+  subredditsCallback: function(err, res) {
+    if (!err && res.ok) {
+      SubredditsAction.storeSubreddits(JSON.parse(res.text).data.children);
     }
   }
 };
