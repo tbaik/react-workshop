@@ -1,10 +1,15 @@
-import request from 'superagent';
+const request = require('superagent');
 
-function createSubredditListingUrl(name) {
-  return 'https://www.reddit.com/r/' + name + '/.json';
+const ListingsAction = require('../actions/listings');
+const SubredditsAction = require('../actions/subreddits');
+
+const REDDIT_HOST = 'https://www.reddit.com';
+
+function createSubredditListingUrl(url) {
+  return REDDIT_HOST + url + '.json';
 }
 
-var client = {
+module.exports = {
   makeGetRequest: function (options, callback) {
     request
       .get(options.url)
@@ -16,8 +21,20 @@ var client = {
     this.makeGetRequest({url: url}, this.subredditListingsCallback);
   },
 
-  subredditListingsCallback: function () {
+  subredditListingsCallback: function (err, res) {
+    if (!err && res.ok) {
+      ListingsAction.storeSubredditListings(JSON.parse(res.text).data.children);
+    }
+  },
+
+  getPopularSubreddits: function () {
+    const url = REDDIT_HOST + '/subreddits/popular.json';
+    this.makeGetRequest({url: url}, this.subredditsCallback);
+  },
+
+  subredditsCallback: function(err, res) {
+    if (!err && res.ok) {
+      SubredditsAction.storeSubreddits(JSON.parse(res.text).data.children);
+    }
   }
 };
-
-export default client;

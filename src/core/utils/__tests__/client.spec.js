@@ -1,6 +1,10 @@
 jest
   .mock('superagent')
-  .unmock('../client');
+  .dontMock('reflux')
+  .dontMock('../client');
+
+const ListingsAction = require('../../actions/listings');
+const SubredditsAction = require('../../actions/subreddits');
 
 describe('Client', () => {
   describe('superagent requests', function() {
@@ -14,12 +18,12 @@ describe('Client', () => {
     };
     jest.setMock('superagent', request);
 
-    var client = require('../client').default;
+    var client = require('../client');
 
     var callback = jest.genMockFunction();
 
-    describe('makeGetRequest', function() {
-      it('makes a GET request with superagent', function() {
+    describe('makeGetRequest', () => {
+      it('makes a GET request with superagent', () => {
         var options = {
           url: '/'
         };
@@ -31,16 +35,59 @@ describe('Client', () => {
       });
     });
 
-    describe('getSubredditListings', function() {
-      it('calls makeGetRequest with a url for a specific subreddit listing', function() {
+    describe('getSubredditListings', () => {
+      it('calls makeGetRequest with a url for a specific subreddit listing', () => {
         var options = {
-          url: 'https://www.reddit.com/r/reactjs/.json'
+          url: 'https://www.reddit.com/r/reactjs.json'
         };
         client.makeGetRequest = jest.genMockFn();
 
-        client.getSubredditListings('reactjs');
+        client.getSubredditListings('/r/reactjs');
 
         expect(client.makeGetRequest).toBeCalledWith(options, client.subredditListingsCallback);
+      });
+    });
+
+    describe('subredditListingsCallback', () => {
+      it('calls the storeSubredditListings action with the listings data', () => {
+        var response = {
+          text: '{"data": {"children": ["listing1"]}}',
+          ok: true
+        };
+        ListingsAction.storeSubredditListings = jest.genMockFn();
+
+        client.subredditListingsCallback(null, response);
+
+        expect(ListingsAction.storeSubredditListings).toBeCalledWith(["listing1"]);
+      });
+    });
+
+    describe('getPopularSubreddits', () => {
+      it('calls makeGetRequest with a url to retrieve the current popular subreddits', () => {
+        var options = {
+          url: 'https://www.reddit.com/subreddits/popular.json'
+        };
+
+        client.makeGetRequest = jest.genMockFn();
+
+        client.getPopularSubreddits();
+
+        expect(client.makeGetRequest).toBeCalledWith(options, client.subredditsCallback);
+      });
+    });
+
+    describe('subredditsCallback', () => {
+      it('calls the storeSubreddits action with the subreddits data', () => {
+        var response = {
+          text: '{"data": {"children": ["subreddit1"]}}',
+          ok: true
+        };
+
+        SubredditsAction.storeSubreddits = jest.genMockFn();
+
+        client.subredditsCallback(null, response);
+
+        expect(SubredditsAction.storeSubreddits).toBeCalledWith(["subreddit1"]);
       });
     });
   });
