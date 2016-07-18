@@ -5,8 +5,8 @@ import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 
 import Application from '../application';
-import SubredditsContainer from '../subredditsContainer';
-import ListingsContainer from '../listingsContainer';
+import SubredditsContainer from '../subreddits/container';
+import ListingsContainer from '../listings/container';
 
 describe('Application', () => {
   it('renders SubredditsContainer', () => {

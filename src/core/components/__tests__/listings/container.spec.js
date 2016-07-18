@@ -4,10 +4,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 
-import ListingsContainer from '../listingsContainer';
-import Listing from '../listing';
-import Loading from '../loading';
-import ListingsAction from '../../actions/listings';
+import ListingsContainer from '../../listings/container';
+import Listing from '../../listings';
+import Loading from '../../loading';
+import ListingsAction from '../../../actions/listings';
 
 describe('ListingsContainer', () => {
   describe('Initial state', () => {

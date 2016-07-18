@@ -1,10 +1,10 @@
 const React = require('react');
 const Reflux = require('reflux');
 
-const Loading = require('../components/loading');
-import Subreddit from '../components/subreddit';
-import SubredditsAction from '../actions/subreddits';
-import SubredditsStore from '../stores/subreddits';
+const Loading = require('../../components/loading');
+import Subreddit from '../../components/subreddits';
+import SubredditsAction from '../../actions/subreddits';
+import SubredditsStore from '../../stores/subreddits';
 
 module.exports = React.createClass({
   displayName: 'Subreddits Container',

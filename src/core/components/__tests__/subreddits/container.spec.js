@@ -4,10 +4,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 
-import SubredditsContainer from '../subredditsContainer';
-import Subreddit from '../subreddit';
-import Loading from '../loading';
-import SubredditsAction from '../../actions/subreddits';
+import SubredditsContainer from '../../subreddits/container';
+import Subreddit from '../../subreddits';
+import Loading from '../../loading';
+import SubredditsAction from '../../../actions/subreddits';
 
 describe('SubredditsContainer', () => {
   describe('Initial state', () => {

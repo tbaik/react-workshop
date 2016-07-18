@@ -1,9 +1,9 @@
-jest.unmock('../listing');
+jest.unmock('../../listings');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
-import Listing from '../listing';
+import Listing from '../../listings';
 
 describe('Listing', () => {
   it('displays the title, author, and score of a given listing', () => {

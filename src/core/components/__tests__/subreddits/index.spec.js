@@ -4,8 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 
-import Subreddit from '../subreddit';
-import ListingsAction from '../../actions/listings';
+import Subreddit from '../../subreddits';
+import ListingsAction from '../../../actions/listings';
 
 describe('Subreddit', () => {
   it('displays its name', () => {

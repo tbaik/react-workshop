@@ -1,10 +1,10 @@
 const React = require('react');
 const Reflux = require('reflux');
 
-const ListingsStore = require('../stores/listings');
-const ListingsAction = require('../actions/listings');
-const Listing = require('../components/listing');
-const Loading = require('../components/loading');
+const ListingsStore = require('../../stores/listings');
+const ListingsAction = require('../../actions/listings');
+const Listing = require('../../components/listings');
+const Loading = require('../../components/loading');
 
 module.exports = React.createClass({
   displayName: 'Listings Container',
