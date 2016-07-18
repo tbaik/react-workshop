@@ -10,7 +10,7 @@ module.exports = Reflux.createStore({
   data: {},
 
   init: function() {
-    this.listenTo(ListingsAction.subredditListingsRequested, this.getListings);
+    this.listenTo(ListingsAction.requestSubredditListings, this.getListings);
     this.listenTo(ListingsAction.storeSubredditListings, this.setListings);
   },
 

@@ -22,11 +22,11 @@ describe('SubredditsContainer', () => {
 
   describe('componentDidMount', () => {
     it('triggers action to request popular subreddits', () => {
-        SubredditsAction.popularSubredditsRequested = jest.genMockFn();
+        SubredditsAction.requestPopularSubreddits = jest.genMockFn();
 
         TestUtils.renderIntoDocument(<SubredditsContainer />);
 
-        expect(SubredditsAction.popularSubredditsRequested).toBeCalled();
+        expect(SubredditsAction.requestPopularSubreddits).toBeCalled();
     });
   });
 

@@ -12,7 +12,7 @@ module.exports = React.createClass({
   mixins: [ Reflux.connect(SubredditsStore, 'subreddits') ],
 
   componentDidMount: function() {
-    SubredditsAction.popularSubredditsRequested();
+    SubredditsAction.requestPopularSubreddits();
   },
 
   render: function() {

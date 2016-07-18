@@ -16,7 +16,7 @@ module.exports = React.createClass({
 
   onClick: function() {
     this.setState({ isSelected: true });
-    ListingsAction.subredditListingsRequested(this.props.url);
+    ListingsAction.requestSubredditListings(this.props.url);
   },
 
   render: function() {

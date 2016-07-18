@@ -27,7 +27,7 @@ describe('Subreddit', () => {
   });
 
   describe('onClick', () => {
-    it('triggers the ListingsAction subredditListingsRequested', () => {
+    it('triggers the ListingsAction requestSubredditListings', () => {
     const subreddit = {
       id: 'someKey',
       name: 'someName',
@@ -42,11 +42,11 @@ describe('Subreddit', () => {
 
     const subredditNode = ReactDOM.findDOMNode(subredditComponent);
 
-    ListingsAction.subredditListingsRequested = jest.genMockFn();
+    ListingsAction.requestSubredditListings = jest.genMockFn();
 
     TestUtils.Simulate.click(subredditNode);
 
-    expect(ListingsAction.subredditListingsRequested).toBeCalledWith(subreddit.url);
+    expect(ListingsAction.requestSubredditListings).toBeCalledWith(subreddit.url);
     });
   });
 });

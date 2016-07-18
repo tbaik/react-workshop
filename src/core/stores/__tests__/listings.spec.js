@@ -5,12 +5,12 @@ const ListingsAction = require('../../actions/listings');
 const Client = require('../../utils/client');
 
 describe('ListingsStore', () => {
-  describe('Action subredditListingsRequested', () => {
+  describe('Action requestSubredditListings', () => {
     it('gets the requested subreddit listings', () => {
       var subreddit = 'someSubreddit';
       Client.getSubredditListings = jest.genMockFn();
 
-      ListingsAction.subredditListingsRequested.trigger(subreddit);
+      ListingsAction.requestSubredditListings.trigger(subreddit);
 
       expect(Client.getSubredditListings).toBeCalledWith(subreddit);
     });
