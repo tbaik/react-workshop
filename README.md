@@ -2,13 +2,8 @@
 
 Node 4.2.6 is required
 
-`npm install babel webpack webpack-dev-server -g` if you do not already have these
+1. Run `npm install` to install the dependencies.
+2. Run `npm start` to start the server.
+3. Navigate to `http://localhost:8005`.
 
-Then run:
-`npm install`
-
-To run the Tests:
-`npm test`
-
-To start the server:
-`npm start`
+Run `npm test` to run the tests
