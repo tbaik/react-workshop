@@ -1,5 +1,7 @@
 const React = require('react');
 
+const UrlDecoder = require('../../utils/urlDecoder');
+
 module.exports = React.createClass({
   displayName: 'Listing Component',
 
@@ -18,7 +20,7 @@ module.exports = React.createClass({
         </td>
         <td className="titleContainer">
           <p className="title">
-            <a href={this.props.url}>{this.props.title}</a>
+            <a href={UrlDecoder.decodeAmpersand(this.props.url)}>{this.props.title}</a>
           </p>
           <p className="author">
             <i>{this.props.author}</i>
