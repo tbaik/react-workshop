@@ -1,17 +1,17 @@
 jest.disableAutomock();
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+const React = require('react');
+const ReactDOM = require('react-dom');
+const TestUtils = require('react-addons-test-utils');
 
-import SubredditsContainer from '../../subreddits/container';
-import Subreddit from '../../subreddits';
-import Loading from '../../loading';
-import SubredditsAction from '../../../actions/subreddits';
+const Loading = require('../../loading');
+const Subreddit = require('../../subreddits');
+const SubredditsAction = require('../../../actions/subreddits');
+const SubredditsContainer = require('../../subreddits/container');
 
-describe('SubredditsContainer', () => {
-  describe('Initial state', () => {
-    it('renders the Loading component', () => {
+describe('SubredditsContainer', function() {
+  describe('Initial state', function() {
+    it('renders the Loading component', function() {
       const container = TestUtils.renderIntoDocument(<SubredditsContainer />);
 
       const loading = TestUtils.scryRenderedComponentsWithType(container, Loading);
@@ -20,8 +20,8 @@ describe('SubredditsContainer', () => {
     });
   });
 
-  describe('componentDidMount', () => {
-    it('triggers action to request popular subreddits', () => {
+  describe('componentDidMount', function() {
+    it('triggers action to request popular subreddits', function() {
         SubredditsAction.requestPopularSubreddits = jest.genMockFn();
 
         TestUtils.renderIntoDocument(<SubredditsContainer />);
@@ -30,7 +30,7 @@ describe('SubredditsContainer', () => {
     });
   });
 
-  describe('After state change', () => {
+  describe('After state change', function() {
     const firstSubreddit = {
       id: 'one',
       display_name: 'someName',
@@ -45,11 +45,11 @@ describe('SubredditsContainer', () => {
 
     var container;
 
-    beforeEach(() => {
+    beforeEach(function() {
       container = TestUtils.renderIntoDocument(<SubredditsContainer />);
     });
 
-    it('renders a Subreddit component and propagates its state', () => {
+    it('renders a Subreddit component and propagates its state', function() {
       const subreddits = {
         subreddits: [ { data: firstSubreddit } ]
       };
@@ -66,7 +66,7 @@ describe('SubredditsContainer', () => {
       expect(props.url).toEqual(firstSubreddit.url);
     });
 
-    it('can render more than one Subreddit', () => {
+    it('can render more than one Subreddit', function() {
       const subreddits = {
         subreddits: [
           { data: firstSubreddit },

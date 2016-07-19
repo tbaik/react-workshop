@@ -1,6 +1,6 @@
 const React = require('react');
 
-import ListingsAction from '../../actions/listings';
+const ListingsAction = require('../../actions/listings');
 
 module.exports = React.createClass({
   displayName: 'Subreddit Component',

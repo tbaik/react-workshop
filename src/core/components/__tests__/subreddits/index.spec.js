@@ -1,14 +1,14 @@
 jest.disableAutomock();
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+const React = require('react');
+const ReactDOM = require('react-dom');
+const TestUtils = require('react-addons-test-utils');
 
-import Subreddit from '../../subreddits';
-import ListingsAction from '../../../actions/listings';
+const ListingsAction = require('../../../actions/listings');
+const Subreddit = require('../../subreddits');
 
-describe('Subreddit', () => {
-  it('displays its name', () => {
+describe('Subreddit', function() {
+  it('displays its name', function() {
     const subreddit = {
       id: 'someKey',
       name: 'someName',
@@ -26,8 +26,8 @@ describe('Subreddit', () => {
     expect(subredditNode.textContent).toContain(subreddit.name);
   });
 
-  describe('onClick', () => {
-    it('triggers the ListingsAction requestSubredditListings', () => {
+  describe('onClick', function() {
+    it('triggers the ListingsAction requestSubredditListings', function() {
     const subreddit = {
       id: 'someKey',
       name: 'someName',

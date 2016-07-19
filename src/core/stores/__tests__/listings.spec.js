@@ -4,9 +4,9 @@ const ListingsStore = require('../listings');
 const ListingsAction = require('../../actions/listings');
 const Client = require('../../utils/client');
 
-describe('ListingsStore', () => {
-  describe('Action requestSubredditListings', () => {
-    it('gets the requested subreddit listings', () => {
+describe('ListingsStore', function() {
+  describe('Action requestSubredditListings', function() {
+    it('gets the requested subreddit listings', function() {
       var subreddit = 'someSubreddit';
       Client.getSubredditListings = jest.genMockFn();
 
@@ -16,8 +16,8 @@ describe('ListingsStore', () => {
     });
   });
 
-  describe('Action storeSubredditListings', () => {
-    it('sets current subreddit listings', () => {
+  describe('Action storeSubredditListings', function() {
+    it('sets current subreddit listings', function() {
       var result = { listing: "someListing" };
       ListingsStore.trigger = jest.genMockFn();
 

@@ -1,12 +1,13 @@
 jest.unmock('../loading');
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
-import Loading from '../loading';
+const React = require('react');
+const ReactDOM = require('react-dom');
+const TestUtils = require('react-addons-test-utils');
 
-describe('Loading', () => {
-  it('displays a loading message', () => {
+const Loading = require('../loading');
+
+describe('Loading', function() {
+  it('displays a loading message', function() {
     var loading = { message: 'someLoadingMessage' };
 
     const loadingComponent = TestUtils.renderIntoDocument(

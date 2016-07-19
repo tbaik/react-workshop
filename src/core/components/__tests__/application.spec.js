@@ -1,15 +1,15 @@
 jest.unmock('../application');
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+const React = require('react');
+const ReactDOM = require('react-dom');
+const TestUtils = require('react-addons-test-utils');
 
-import Application from '../application';
-import SubredditsContainer from '../subreddits/container';
-import ListingsContainer from '../listings/container';
+const Application = require('../application');
+const ListingsContainer = require('../listings/container');
+const SubredditsContainer = require('../subreddits/container');
 
-describe('Application', () => {
-  it('renders SubredditsContainer', () => {
+describe('Application', function() {
+  it('renders SubredditsContainer', function() {
     const container = TestUtils.renderIntoDocument(<Application />);
 
     const subredditContainer = TestUtils.scryRenderedComponentsWithType(container, SubredditsContainer);
@@ -17,7 +17,7 @@ describe('Application', () => {
     expect(subredditContainer.length).toBe(1);
   });
 
-  it('renders ListingsContainer', () => {
+  it('renders ListingsContainer', function() {
     const container = TestUtils.renderIntoDocument(<Application />);
 
     const subredditContainer = TestUtils.scryRenderedComponentsWithType(container, ListingsContainer);

@@ -1,17 +1,17 @@
 jest.disableAutomock();
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+const React = require('react');
+const ReactDOM = require('react-dom');
+const TestUtils = require('react-addons-test-utils');
 
-import ListingsContainer from '../../listings/container';
-import Listing from '../../listings';
-import Loading from '../../loading';
-import ListingsAction from '../../../actions/listings';
+const Listing = require('../../listings');
+const ListingsAction = require('../../../actions/listings');
+const ListingsContainer = require('../../listings/container');
+const Loading = require('../../loading');
 
-describe('ListingsContainer', () => {
-  describe('Initial state', () => {
-    it('renders the Loading component', () => {
+describe('ListingsContainer', function() {
+  describe('Initial state', function() {
+    it('renders the Loading component', function() {
       const container = TestUtils.renderIntoDocument(<ListingsContainer />);
 
       const loading = TestUtils.scryRenderedComponentsWithType(container, Loading);
@@ -20,7 +20,7 @@ describe('ListingsContainer', () => {
     });
   });
 
-  describe('After state change', () => {
+  describe('After state change', function() {
     const firstListing = {
       id: 'one',
       title: 'someTitle',
@@ -39,11 +39,11 @@ describe('ListingsContainer', () => {
 
     var container;
 
-    beforeEach(() => {
+    beforeEach(function() {
       container = TestUtils.renderIntoDocument(<ListingsContainer />);
     });
 
-    it('renders a Listing component and propagates its state', () => {
+    it('renders a Listing component and propagates its state', function() {
       const listings = {
         listings: [ { data: firstListing } ]
       };
@@ -62,7 +62,7 @@ describe('ListingsContainer', () => {
       expect(props.score).toEqual(firstListing.score);
     });
 
-    it('can render more than one Listing', () => {
+    it('can render more than one Listing', function() {
       const listings = {
         listings: [
           { data: firstListing },

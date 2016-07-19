@@ -4,9 +4,9 @@ const SubredditsStore = require('../subreddits');
 const SubredditsAction = require('../../actions/subreddits');
 const Client = require('../../utils/client');
 
-describe('SubredditsStore', () => {
-  describe('Action popularSubredditsRequested', () => {
-    it('gets the  listings', () => {
+describe('SubredditsStore', function() {
+  describe('Action popularSubredditsRequested', function() {
+    it('gets the  listings', function() {
       Client.getPopularSubreddits = jest.genMockFn();
 
       SubredditsAction.requestPopularSubreddits.trigger();
@@ -15,8 +15,8 @@ describe('SubredditsStore', () => {
     });
   });
 
-  describe('Action storeSubreddits', () => {
-    it('sets the list of subreddits and triggers the data', () => {
+  describe('Action storeSubreddits', function() {
+    it('sets the list of subreddits and triggers the data', function() {
       var result = { subreddit: "someSubreddit" };
       SubredditsStore.trigger = jest.genMockFn();
 

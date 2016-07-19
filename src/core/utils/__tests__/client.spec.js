@@ -6,7 +6,7 @@ jest
 const ListingsAction = require('../../actions/listings');
 const SubredditsAction = require('../../actions/subreddits');
 
-describe('Client', () => {
+describe('Client', function() {
   describe('superagent requests', function() {
     var request = {
       get: jest.genMockFunction().mockImplementation(function() {
@@ -22,8 +22,8 @@ describe('Client', () => {
 
     var callback = jest.genMockFunction();
 
-    describe('makeGetRequest', () => {
-      it('makes a GET request with superagent', () => {
+    describe('makeGetRequest', function() {
+      it('makes a GET request with superagent', function() {
         var options = {
           url: '/'
         };
@@ -35,8 +35,8 @@ describe('Client', () => {
       });
     });
 
-    describe('getSubredditListings', () => {
-      it('calls makeGetRequest with a url for a specific subreddit listing', () => {
+    describe('getSubredditListings', function() {
+      it('calls makeGetRequest with a url for a specific subreddit listing', function() {
         var options = {
           url: 'https://www.reddit.com/r/reactjs.json'
         };
@@ -48,8 +48,8 @@ describe('Client', () => {
       });
     });
 
-    describe('subredditListingsCallback', () => {
-      it('calls the storeSubredditListings action with the listings data', () => {
+    describe('subredditListingsCallback', function() {
+      it('calls the storeSubredditListings action with the listings data', function() {
         var response = {
           text: '{"data": {"children": ["listing1"]}}',
           ok: true
@@ -62,8 +62,8 @@ describe('Client', () => {
       });
     });
 
-    describe('getPopularSubreddits', () => {
-      it('calls makeGetRequest with a url to retrieve the current popular subreddits', () => {
+    describe('getPopularSubreddits', function() {
+      it('calls makeGetRequest with a url to retrieve the current popular subreddits', function() {
         var options = {
           url: 'https://www.reddit.com/subreddits/popular.json'
         };
@@ -76,8 +76,8 @@ describe('Client', () => {
       });
     });
 
-    describe('subredditsCallback', () => {
-      it('calls the storeSubreddits action with the subreddits data', () => {
+    describe('subredditsCallback', function() {
+      it('calls the storeSubreddits action with the subreddits data', function() {
         var response = {
           text: '{"data": {"children": ["subreddit1"]}}',
           ok: true
