@@ -4,57 +4,41 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const TestUtils = require('react-addons-test-utils');
 
-const Loading = require('../../loading');
 const Subreddit = require('../../subreddits');
-const SubredditsAction = require('../../../actions/subreddits');
 const SubredditsContainer = require('../../subreddits/container');
 
 describe('SubredditsContainer', function() {
-  describe('Initial state', function() {
-    it('renders the Loading component', function() {
-      const container = TestUtils.renderIntoDocument(<SubredditsContainer />);
+  //describe('componentDidMount', function() {
+    //it('triggers action to request popular subreddits', function() {
+        //SubredditsAction.requestPopularSubreddits = jest.genMockFn();
 
-      const loading = TestUtils.scryRenderedComponentsWithType(container, Loading);
+        //TestUtils.renderIntoDocument(<SubredditsContainer />);
 
-      expect(loading.length).toBe(1);
-    });
-  });
+        //expect(SubredditsAction.requestPopularSubreddits).toBeCalled();
+    //});
+  //});
 
-  describe('componentDidMount', function() {
-    it('triggers action to request popular subreddits', function() {
-        SubredditsAction.requestPopularSubreddits = jest.genMockFn();
-
-        TestUtils.renderIntoDocument(<SubredditsContainer />);
-
-        expect(SubredditsAction.requestPopularSubreddits).toBeCalled();
-    });
-  });
-
-  describe('After state change', function() {
+  describe('render', function() {
     const firstSubreddit = {
-      id: 'one',
-      display_name: 'someName',
-      url: 'someUrl'
+      data: {
+        id: 'one',
+        display_name: 'someName',
+        url: 'someUrl'
+      }
     }
 
     const secondSubreddit = {
-      id: 'two',
-      display_name: 'anotherName',
-      url: 'anotherUrl'
+      data: {
+        id: 'two',
+        display_name: 'anotherName',
+        url: 'anotherUrl'
+      }
     }
 
-    var container;
+    it('renders a Subreddit component and propagates its props', function() {
+      const subreddits = [ firstSubreddit ];
 
-    beforeEach(function() {
-      container = TestUtils.renderIntoDocument(<SubredditsContainer />);
-    });
-
-    it('renders a Subreddit component and propagates its state', function() {
-      const subreddits = {
-        subreddits: [ { data: firstSubreddit } ]
-      };
-
-      container.setState({ subreddits: subreddits });
+      const container = TestUtils.renderIntoDocument(<SubredditsContainer subreddits={subreddits} />);
 
       const subredditComponents = TestUtils.scryRenderedComponentsWithType(container, Subreddit);
 
@@ -62,19 +46,14 @@ describe('SubredditsContainer', function() {
 
       const props = subredditComponents[0].props;
 
-      expect(props.name).toEqual(firstSubreddit.display_name);
-      expect(props.url).toEqual(firstSubreddit.url);
+      expect(props.name).toEqual(firstSubreddit.data.display_name);
+      expect(props.url).toEqual(firstSubreddit.data.url);
     });
 
     it('can render more than one Subreddit', function() {
-      const subreddits = {
-        subreddits: [
-          { data: firstSubreddit },
-          { data: secondSubreddit },
-        ]
-      };
+      const subreddits = [ firstSubreddit, secondSubreddit ];
 
-      container.setState({ subreddits: subreddits });
+      const container = TestUtils.renderIntoDocument(<SubredditsContainer subreddits={subreddits} />);
 
       const subredditComponents = TestUtils.scryRenderedComponentsWithType(container, Subreddit);
 
