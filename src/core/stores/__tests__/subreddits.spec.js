@@ -9,7 +9,7 @@ describe('SubredditsStore', () => {
     it('gets the  listings', () => {
       Client.getPopularSubreddits = jest.genMockFn();
 
-      SubredditsAction.popularSubredditsRequested.trigger();
+      SubredditsAction.requestPopularSubreddits.trigger();
 
       expect(Client.getPopularSubreddits).toBeCalled();
     });

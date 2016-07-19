@@ -10,7 +10,7 @@ module.exports = Reflux.createStore({
   data: {},
 
   init: function() {
-    this.listenTo(SubredditsAction.popularSubredditsRequested, this.getPopularSubreddits);
+    this.listenTo(SubredditsAction.requestPopularSubreddits, this.getPopularSubreddits);
     this.listenTo(SubredditsAction.storeSubreddits, this.setSubreddits);
   },
 
