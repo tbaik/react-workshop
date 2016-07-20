@@ -5,50 +5,34 @@ const ReactDOM = require('react-dom');
 const TestUtils = require('react-addons-test-utils');
 
 const Listing = require('../../listings');
-const ListingsAction = require('../../../actions/listings');
 const ListingsContainer = require('../../listings/container');
-const Loading = require('../../loading');
 
 describe('ListingsContainer', function() {
-  describe('Initial state', function() {
-    it('renders the Loading component', function() {
-      const container = TestUtils.renderIntoDocument(<ListingsContainer />);
-
-      const loading = TestUtils.scryRenderedComponentsWithType(container, Loading);
-
-      expect(loading.length).toBe(1);
-    });
-  });
-
-  describe('After state change', function() {
+  describe('render', function() {
     const firstListing = {
-      id: 'one',
-      title: 'someTitle',
-      author: 'someAuthor',
-      url: 'someUrl',
-      score: 100
+      data: {
+        id: 'one',
+        title: 'someTitle',
+        author: 'someAuthor',
+        url: 'someUrl',
+        score: 100
+      }
     }
 
     const secondListing = {
-      id: 'two',
-      title: 'anotherTitle',
-      author: 'anotherAuthor',
-      url: 'anotherUrl',
-      score: 90
+      data: {
+        id: 'two',
+        title: 'anotherTitle',
+        author: 'anotherAuthor',
+        url: 'anotherUrl',
+        score: 90
+      }
     }
 
-    var container;
+    it('renders a Listing component and propagates its props', function() {
+      const listings = [ firstListing ];
 
-    beforeEach(function() {
-      container = TestUtils.renderIntoDocument(<ListingsContainer />);
-    });
-
-    it('renders a Listing component and propagates its state', function() {
-      const listings = {
-        listings: [ { data: firstListing } ]
-      };
-
-      container.setState({ listings: listings });
+      const container = TestUtils.renderIntoDocument(<ListingsContainer listings={listings} />);
 
       const listingComponents = TestUtils.scryRenderedComponentsWithType(container, Listing);
 
@@ -56,21 +40,16 @@ describe('ListingsContainer', function() {
 
       const props = listingComponents[0].props;
 
-      expect(props.title).toEqual(firstListing.title);
-      expect(props.author).toEqual(firstListing.author);
-      expect(props.url).toEqual(firstListing.url);
-      expect(props.score).toEqual(firstListing.score);
+      expect(props.title).toEqual(firstListing.data.title);
+      expect(props.author).toEqual(firstListing.data.author);
+      expect(props.url).toEqual(firstListing.data.url);
+      expect(props.score).toEqual(firstListing.data.score);
     });
 
     it('can render more than one Listing', function() {
-      const listings = {
-        listings: [
-          { data: firstListing },
-          { data: secondListing },
-        ]
-      };
+      const listings = [ firstListing, secondListing ];
 
-      container.setState({ listings: listings });
+      const container = TestUtils.renderIntoDocument(<ListingsContainer listings={listings} />);
 
       const listingComponents = TestUtils.scryRenderedComponentsWithType(container, Listing);
 
