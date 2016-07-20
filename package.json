@@ -2,6 +2,10 @@
   "name": "react-workshop",
   "version": "1.0.0",
   "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tbaik/react-workshop.git"
+  },
   "main": "index.js",
   "engines": {
     "node": "4.2.6"
