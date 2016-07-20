@@ -1,3 +1,8 @@
+## WORKSHOP OBJECTIVES:
+
+- Fix the subreddit selection so that only the selected subreddit is highlighted.
+- Create a header component that updates its title based on the current selected subreddit.
+
 ##SETUP:
 
 Node 4.2.6 is required
