@@ -28,25 +28,51 @@ describe('Subreddit', function() {
 
   describe('onClick', function() {
     it('triggers the ListingsAction requestSubredditListings', function() {
-    const subreddit = {
-      id: 'someKey',
-      name: 'someName',
-      url: 'someUrl'
-    };
+      const subreddit = {
+        id: 'someKey',
+        name: 'someName',
+        url: 'someUrl'
+      };
 
-    const subredditComponent = TestUtils.renderIntoDocument(
-      <Subreddit
-        name={subreddit.name}
-        url={subreddit.url} />
-    );
+      const subredditComponent = TestUtils.renderIntoDocument(
+        <Subreddit
+          name={subreddit.name}
+          url={subreddit.url} />
+      );
 
-    const subredditNode = ReactDOM.findDOMNode(subredditComponent);
+      const subredditNode = ReactDOM.findDOMNode(subredditComponent);
 
-    ListingsAction.requestSubredditListings = jest.genMockFn();
+      ListingsAction.requestSubredditListings = jest.genMockFn();
 
-    TestUtils.Simulate.click(subredditNode);
+      TestUtils.Simulate.click(subredditNode);
 
-    expect(ListingsAction.requestSubredditListings).toBeCalledWith(subreddit.url);
+      expect(ListingsAction.requestSubredditListings).toBeCalledWith(subreddit.url);
+    });
+
+    // This is where our first failing test is.  We want to test that clicking on
+    // a subreddit component will trigger the SubredditAction highlightSubreddit
+
+    it('triggers the SubredditAction highlightSubreddit', function() {
+      const subreddit = {
+        id: 'someKey',
+        name: 'someName',
+        url: 'someUrl',
+
+      };
+
+      const subredditComponent = TestUtils.renderIntoDocument(
+        <Subreddit
+          name={subreddit.name}
+          url={subreddit.url} />
+      );
+
+      const subredditNode = ReactDOM.findDOMNode(subredditComponent);
+
+      SubredditsAction.highlightSubreddit = jest.genMockFn();
+
+      TestUtils.Simulate.click(subredditNode)
+
+      expect(SubredditsAction.highlightSubreddit).toBeCalledWith(subreddit.name);
     });
   });
 });
