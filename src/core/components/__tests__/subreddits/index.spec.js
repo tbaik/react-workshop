@@ -50,9 +50,9 @@ describe('Subreddit', function() {
     });
 
     // This is where our first failing test is.  We want to test that clicking on
-    // a subreddit component will trigger the SubredditAction highlighSubreddit
+    // a subreddit component will trigger the SubredditAction highlightSubreddit
 
-    it('triggers the SubredditAction highlighSubreddit', function() {
+    it('triggers the SubredditAction highlightSubreddit', function() {
       const subreddit = {
         id: 'someKey',
         name: 'someName',
