@@ -1,37 +1,59 @@
-jest.unmock('../../listings');
+jest.disableAutomock();
 
 const React = require('react');
 const ReactDOM = require('react-dom');
 const TestUtils = require('react-addons-test-utils');
 
-const Listing = require('../../listings');
+const Listing = require('../../listings/item');
+const ListingsContainer = require('../../listings');
 
-describe('Listing', () => {
-  it('displays the title, author, and score of a given listing', () => {
-    var listing = {
-      id: 'someKey',
-      title: 'someTitle',
-      author: 'someone',
-      url: 'someUrl',
-      score: 10
-    };
+describe('ListingsContainer', function() {
+  describe('render', function() {
+    const firstListing = {
+      data: {
+        id: 'one',
+        title: 'someTitle',
+        author: 'someAuthor',
+        url: 'someUrl',
+        score: 100
+      }
+    }
 
-    const listingComponent = TestUtils.renderIntoDocument(
-      <table>
-        <tbody>
-          <Listing
-            title={listing.title}
-            author={listing.author}
-            url={listing.url}
-            score={listing.score} />
-        </tbody>
-      </table>
-    );
+    const secondListing = {
+      data: {
+        id: 'two',
+        title: 'anotherTitle',
+        author: 'anotherAuthor',
+        url: 'anotherUrl',
+        score: 90
+      }
+    }
 
-    const listingNode = ReactDOM.findDOMNode(listingComponent);
+    it('renders a Listing component and propagates its props', function() {
+      const listings = [ firstListing ];
 
-    expect(listingNode.textContent).toContain(listing.title);
-    expect(listingNode.textContent).toContain(listing.author);
-    expect(listingNode.textContent).toContain(listing.score);
+      const container = TestUtils.renderIntoDocument(<ListingsContainer listings={listings} />);
+
+      const listingComponents = TestUtils.scryRenderedComponentsWithType(container, Listing);
+
+      expect(listingComponents.length).toBe(1);
+
+      const props = listingComponents[0].props;
+
+      expect(props.title).toEqual(firstListing.data.title);
+      expect(props.author).toEqual(firstListing.data.author);
+      expect(props.url).toEqual(firstListing.data.url);
+      expect(props.score).toEqual(firstListing.data.score);
+    });
+
+    it('can render more than one Listing', function() {
+      const listings = [ firstListing, secondListing ];
+
+      const container = TestUtils.renderIntoDocument(<ListingsContainer listings={listings} />);
+
+      const listingComponents = TestUtils.scryRenderedComponentsWithType(container, Listing);
+
+      expect(listingComponents.length).toBe(2);
+    });
   });
 });

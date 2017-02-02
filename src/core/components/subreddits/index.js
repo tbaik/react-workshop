@@ -1,29 +1,34 @@
 const React = require('react');
+const Reflux = require('reflux');
 
-const ListingsAction = require('../../actions/listings');
+const Subreddit = require('../../components/subreddits/item');
 
 module.exports = React.createClass({
-  displayName: 'Subreddit Component',
+  displayName: 'Subreddits Container',
 
   propTypes: {
-    name: React.PropTypes.string.isRequired,
-    url: React.PropTypes.string.isRequired
+    subreddits: React.PropTypes.array.isRequired
   },
 
-  getInitialState: function() {
-    return { isSelected: false };
-  },
-
-  onClick: function() {
-    this.setState({ isSelected: true });
-    ListingsAction.requestSubredditListings(this.props.url);
+  renderSubreddits: function(subreddits) {
+    return subreddits.map(function(item) {
+      return (
+        <Subreddit
+          key={item.data.id}
+          name={item.data.display_name}
+          url={item.data.url} />
+      );
+    });
   },
 
   render: function() {
-    return (
-      <li onClick={this.onClick} className={this.state.isSelected ? 'selected' : ''}>
-        {this.props.name}
-      </li>
+    return(
+      <div className="navigation">
+        <div className="header">Navigation</div>
+        <ul>
+          { this.renderSubreddits(this.props.subreddits) }
+        </ul>
+      </div>
     );
   }
 });

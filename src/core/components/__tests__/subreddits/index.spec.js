@@ -4,75 +4,50 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const TestUtils = require('react-addons-test-utils');
 
-const ListingsAction = require('../../../actions/listings');
-const Subreddit = require('../../subreddits');
+const Subreddit = require('../../subreddits/item');
+const SubredditsContainer = require('../../subreddits');
 
-describe('Subreddit', function() {
-  it('displays its name', function() {
-    const subreddit = {
-      id: 'someKey',
-      name: 'someName',
-      url: 'someUrl'
-    };
-
-    const subredditComponent = TestUtils.renderIntoDocument(
-      <Subreddit
-        name={subreddit.name}
-        url={subreddit.url} />
-    );
-
-    const subredditNode = ReactDOM.findDOMNode(subredditComponent);
-
-    expect(subredditNode.textContent).toContain(subreddit.name);
-  });
-
-  describe('onClick', function() {
-    it('triggers the ListingsAction requestSubredditListings', function() {
-      const subreddit = {
-        id: 'someKey',
-        name: 'someName',
+describe('SubredditsContainer', function() {
+  describe('render', function() {
+    const firstSubreddit = {
+      data: {
+        id: 'one',
+        display_name: 'someName',
         url: 'someUrl'
-      };
+      }
+    }
 
-      const subredditComponent = TestUtils.renderIntoDocument(
-        <Subreddit
-          name={subreddit.name}
-          url={subreddit.url} />
-      );
+    const secondSubreddit = {
+      data: {
+        id: 'two',
+        display_name: 'anotherName',
+        url: 'anotherUrl'
+      }
+    }
 
-      const subredditNode = ReactDOM.findDOMNode(subredditComponent);
+    it('renders a Subreddit component and propagates its props', function() {
+      const subreddits = [ firstSubreddit ];
 
-      ListingsAction.requestSubredditListings = jest.genMockFn();
+      const container = TestUtils.renderIntoDocument(<SubredditsContainer subreddits={subreddits} />);
 
-      TestUtils.Simulate.click(subredditNode);
+      const subredditComponents = TestUtils.scryRenderedComponentsWithType(container, Subreddit);
 
-      expect(ListingsAction.requestSubredditListings).toBeCalledWith(subreddit.url);
+      expect(subredditComponents.length).toBe(1);
+
+      const props = subredditComponents[0].props;
+
+      expect(props.name).toEqual(firstSubreddit.data.display_name);
+      expect(props.url).toEqual(firstSubreddit.data.url);
     });
 
-    // This is where our first failing test is.  We want to test that clicking on
-    // a subreddit component will trigger the SubredditAction highlightSubreddit
+    it('can render more than one Subreddit', function() {
+      const subreddits = [ firstSubreddit, secondSubreddit ];
 
-    it('triggers the SubredditAction highlightSubreddit', function() {
-      const subreddit = {
-        id: 'someKey',
-        name: 'someName',
-        url: 'someUrl',
+      const container = TestUtils.renderIntoDocument(<SubredditsContainer subreddits={subreddits} />);
 
-      };
+      const subredditComponents = TestUtils.scryRenderedComponentsWithType(container, Subreddit);
 
-      const subredditComponent = TestUtils.renderIntoDocument(
-        <Subreddit
-          name={subreddit.name}
-          url={subreddit.url} />
-      );
-
-      const subredditNode = ReactDOM.findDOMNode(subredditComponent);
-
-      SubredditsAction.highlightSubreddit = jest.genMockFn();
-
-      TestUtils.Simulate.click(subredditNode)
-
-      expect(SubredditsAction.highlightSubreddit).toBeCalledWith(subreddit.name);
+      expect(subredditComponents.length).toBe(2);
     });
   });
 });

@@ -5,9 +5,9 @@ const ReactDOM = require('react-dom');
 const TestUtils = require('react-addons-test-utils');
 
 const Application = require('../application');
-const ListingsContainer = require('../listings/container');
+const ListingsContainer = require('../listings');
 const SubredditsAction = require('../../actions/subreddits');
-const SubredditsContainer = require('../subreddits/container');
+const SubredditsContainer = require('../subreddits');
 
 describe('Application', function() {
   describe('componentDidMount', function() {
