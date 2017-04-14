@@ -17,7 +17,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel": "^6.5.2",
+    "babel-cli": "^6.5.2",
     "babel-core": "^6.8.0",
     "babel-jest": "^12.0.2",
     "babel-loader": "^6.2.4",
@@ -35,7 +35,7 @@
     "react-addons-test-utils": "~0.14.0"
   },
   "jest": {
-    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "transform": {".*": "<rootDir>/node_modules/babel-jest"},
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react/",
       "<rootDir>/node_modules/react-dom/",
