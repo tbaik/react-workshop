@@ -1,10 +1,8 @@
-jest.unmock('../../listings/item');
-
-const React = require('react');
-const ReactDOM = require('react-dom');
-const TestUtils = require('react-addons-test-utils');
-
-const Listing = require('../../listings/item');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Listing from '../../listings/item';
+import ListingsContainer from '../../listings';
+import TestUtils from 'react-dom/test-utils';
 
 describe('Listing', () => {
   it('displays the title, author, and score of a given listing', () => {

@@ -1,9 +1,9 @@
-var path = require('path');
+import path from 'path';
 
-module.exports = {
-  entry: './src/core/index.js',
+export default {
+  entry: './src/index.js',
   output: {
-    path: './target/',
+    path: __dirname,
     filename: 'index.js'
   },
   devServer: {
@@ -15,15 +15,11 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel',
+        loader: 'babel-loader',
         query: {
           presets: ['es2015', 'react']
         }
       }
     ]
-  },
-  resolve: {
-    root: [path.resolve(__dirname, 'src/core'), path.resolve(__dirname, 'src/test')],
-    extensions: ["", ".js", ".jsx"]
   }
 }

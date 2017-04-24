@@ -1,14 +1,10 @@
-jest.disableAutomock();
+import React from 'react';
+import Subreddit from '../../subreddits/item';
+import SubredditsContainer from '../../subreddits';
+import TestUtils from 'react-dom/test-utils';
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-const TestUtils = require('react-addons-test-utils');
-
-const Subreddit = require('../../subreddits/item');
-const SubredditsContainer = require('../../subreddits');
-
-describe('SubredditsContainer', function() {
-  describe('render', function() {
+describe('SubredditsContainer', () => {
+  describe('render', () => {
     const firstSubreddit = {
       data: {
         id: 'one',
@@ -25,10 +21,10 @@ describe('SubredditsContainer', function() {
       }
     }
 
-    it('renders a Subreddit component and propagates its props', function() {
+    it('renders a Subreddit component and propagates its props', () => {
       const subreddits = [ firstSubreddit ];
 
-      const container = TestUtils.renderIntoDocument(<SubredditsContainer subreddits={subreddits} />);
+      const container = TestUtils.renderIntoDocument(<SubredditsContainer subreddits={subreddits} activeSubreddit={jest.genMockFn()} />);
 
       const subredditComponents = TestUtils.scryRenderedComponentsWithType(container, Subreddit);
 
@@ -40,10 +36,10 @@ describe('SubredditsContainer', function() {
       expect(props.url).toEqual(firstSubreddit.data.url);
     });
 
-    it('can render more than one Subreddit', function() {
+    it('can render more than one Subreddit', () => {
       const subreddits = [ firstSubreddit, secondSubreddit ];
 
-      const container = TestUtils.renderIntoDocument(<SubredditsContainer subreddits={subreddits} />);
+      const container = TestUtils.renderIntoDocument(<SubredditsContainer subreddits={subreddits} activeSubreddit={jest.genMockFn()} />);
 
       const subredditComponents = TestUtils.scryRenderedComponentsWithType(container, Subreddit);
 

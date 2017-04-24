@@ -1,14 +1,10 @@
-jest.disableAutomock();
+import React from 'react';
+import Listing from '../../listings/item';
+import ListingsContainer from '../../listings';
+import TestUtils from 'react-dom/test-utils';
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-const TestUtils = require('react-addons-test-utils');
-
-const Listing = require('../../listings/item');
-const ListingsContainer = require('../../listings');
-
-describe('ListingsContainer', function() {
-  describe('render', function() {
+describe('ListingsContainer', () => {
+  describe('render', () => {
     const firstListing = {
       data: {
         id: 'one',
@@ -29,7 +25,7 @@ describe('ListingsContainer', function() {
       }
     }
 
-    it('renders a Listing component and propagates its props', function() {
+    it('renders a Listing component and propagates its props', () => {
       const listings = [ firstListing ];
 
       const container = TestUtils.renderIntoDocument(<ListingsContainer listings={listings} />);
@@ -46,7 +42,7 @@ describe('ListingsContainer', function() {
       expect(props.score).toEqual(firstListing.data.score);
     });
 
-    it('can render more than one Listing', function() {
+    it('can render more than one Listing', () => {
       const listings = [ firstListing, secondListing ];
 
       const container = TestUtils.renderIntoDocument(<ListingsContainer listings={listings} />);
