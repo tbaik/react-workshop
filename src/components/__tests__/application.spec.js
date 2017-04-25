@@ -13,35 +13,43 @@ describe('Application', () => {
 
       TestUtils.renderIntoDocument(<Application />);
 
-      expect(client.getPopularSubreddits).toBeCalled();
+      expect(client.getPopularSubreddits).toBeCalledWith(expect.any(Function));
     });
   });
 
   describe('render', () => {
     var container;
+    const listings = [];
+    const subreddits = [];
 
     beforeEach(() => {
-      const listings = [];
-      const subreddits = [];
-
       container = TestUtils.renderIntoDocument(<Application />);
       container.setState({
         listings: listings,
         subreddits: subreddits
       });
-
     });
 
     it('renders SubredditsContainer', () => {
-      const subredditContainer = TestUtils.scryRenderedComponentsWithType(container, SubredditsContainer);
+      const subredditContainer = TestUtils.findRenderedComponentWithType(container, SubredditsContainer);
 
-      expect(subredditContainer.length).toBe(1);
+      expect(subredditContainer.props.subreddits).toBe(subreddits);
+    });
+
+    it('setActiveSubreddit calls getListings', () => {
+      client.getListings = jest.genMockFn();
+
+      const subredditContainer = TestUtils.findRenderedComponentWithType(container, SubredditsContainer);
+
+      subredditContainer.props.setActiveSubreddit('some subreddit');
+
+      expect(client.getListings).toBeCalledWith('some subreddit', expect.any(Function));
     });
 
     it('renders ListingsContainer', () => {
-      const subredditContainer = TestUtils.scryRenderedComponentsWithType(container, ListingsContainer);
+      const listingsContainer = TestUtils.findRenderedComponentWithType(container, ListingsContainer);
 
-      expect(subredditContainer.length).toBe(1);
+      expect(listingsContainer.props.listings).toBe(listings);
     });
   });
 });

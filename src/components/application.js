@@ -30,7 +30,7 @@ export default class Application extends React.Component {
       <div>
         <SubredditsContainer
           subreddits={this.state.subreddits}
-          activeSubreddit={this.setActiveSubreddit.bind(this)} />
+          setActiveSubreddit={this.setActiveSubreddit.bind(this)} />
         <ListingsContainer listings={this.state.listings} />
       </div>
     );

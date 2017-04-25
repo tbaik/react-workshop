@@ -24,7 +24,7 @@ describe('SubredditsContainer', () => {
     it('renders a Subreddit component and propagates its props', () => {
       const subreddits = [ firstSubreddit ];
 
-      const container = TestUtils.renderIntoDocument(<SubredditsContainer subreddits={subreddits} activeSubreddit={jest.genMockFn()} />);
+      const container = TestUtils.renderIntoDocument(<SubredditsContainer subreddits={subreddits} setActiveSubreddit={jest.genMockFn()} />);
 
       const subredditComponents = TestUtils.scryRenderedComponentsWithType(container, Subreddit);
 
@@ -39,7 +39,7 @@ describe('SubredditsContainer', () => {
     it('can render more than one Subreddit', () => {
       const subreddits = [ firstSubreddit, secondSubreddit ];
 
-      const container = TestUtils.renderIntoDocument(<SubredditsContainer subreddits={subreddits} activeSubreddit={jest.genMockFn()} />);
+      const container = TestUtils.renderIntoDocument(<SubredditsContainer subreddits={subreddits} setActiveSubreddit={jest.genMockFn()} />);
 
       const subredditComponents = TestUtils.scryRenderedComponentsWithType(container, Subreddit);
 

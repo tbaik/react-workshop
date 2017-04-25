@@ -7,7 +7,7 @@ export default class SubredditsContainer extends React.Component {
     return subreddits.map(item => {
       return (
         <Subreddit
-          activate={this.props.activeSubreddit}
+          activate={this.props.setActiveSubreddit}
           key={item.data.id}
           name={item.data.display_name}
           url={item.data.url} />
@@ -29,5 +29,5 @@ export default class SubredditsContainer extends React.Component {
 
 SubredditsContainer.propTypes = {
   subreddits: PropTypes.array.isRequired,
-  activeSubreddit: PropTypes.func.isRequired
+  setActiveSubreddit: PropTypes.func.isRequired
 }
